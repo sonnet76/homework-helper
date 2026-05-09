@@ -1,0 +1,154 @@
+:root {
+  --primary: #FF6B6B;
+  --secondary: #4ECDC4;
+  --accent: #FFE66D;
+  --background: #F7FFF7;
+  --text: #292F36;
+  --card-bg: #FFFFFF;
+  --border-radius: 16px;
+  --box-shadow: 4px 4px 0px 0px var(--text);
+  --font-playful: 'Nunito', 'Arial', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+  font-family: var(--font-playful);
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 3px solid var(--text);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: transform 0.1s ease-in-out;
+}
+
+.card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px 0px var(--text);
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: var(--primary);
+  border: 3px solid var(--text);
+  border-radius: 12px;
+  box-shadow: 3px 3px 0px 0px var(--text);
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px 0px var(--text);
+}
+
+.btn-secondary {
+  background: var(--secondary);
+}
+
+.btn-accent {
+  background: var(--accent);
+}
+
+header {
+  background: var(--card-bg);
+  border-bottom: 3px solid var(--text);
+  padding: 15px 0;
+  margin-bottom: 30px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-link {
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+.nav-link:hover {
+  background: var(--accent);
+}
+
+.main-layout {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 30px;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.sidebar-item {
+  padding: 12px;
+  border: 2px solid var(--text);
+  border-radius: 12px;
+  background: var(--card-bg);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sidebar-item:hover {
+  background: var(--secondary);
+}
+
+.sidebar-item.active {
+  background: var(--primary);
+  color: white;
+}
+
+.points-badge {
+  background: var(--accent);
+  border: 2px solid var(--text);
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
