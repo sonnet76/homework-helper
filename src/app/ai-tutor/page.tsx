@@ -32,7 +32,8 @@ export default function AiTutorPage() {
       const data = await res.json();
       
       setMessages(prev => [...prev, { role: 'ai', text: data.text || data.error }]);
-    } catch (error) {
+    } catch (err) {
+      console.error('AI Tutor error:', err);
       setMessages(prev => [...prev, { role: 'ai', text: '오류가 발생했어요. 다시 시도해주세요.' }]);
     } finally {
       setLoading(false);

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 interface Task {
   id: number;
@@ -15,18 +15,38 @@ export default function PlannerPage() {
   const [newTitle, setNewTitle] = useState('');
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchTasks();
+  const fetchTasks = useCallback(async () => {
+    try {
+      const res = await fetch('/api/tasks');
+      const data = await res.json();
+      if (Array.isArray(data)) {
+        setTasks(data);
+      }
+    } catch (error) {
+      console.error('Failed to fetch tasks:', error);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
-  const fetchTasks = async () => {
-    const res = await fetch('/api/tasks');
-    const data = await res.json();
-    if (Array.isArray(data)) {
-      setTasks(data);
-    }
-    setLoading(false);
-  };
+  useEffect(() => {
+    let mounted = true;
+    const init = async () => {
+      try {
+        const res = await fetch('/api/tasks');
+        const data = await res.json();
+        if (mounted && Array.isArray(data)) {
+          setTasks(data);
+        }
+      } catch (err) {
+        console.error('Initial fetch error:', err);
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    };
+    init();
+    return () => { mounted = false; };
+  }, []);
 
   const addTask = async (e: React.FormEvent) => {
     e.preventDefault();

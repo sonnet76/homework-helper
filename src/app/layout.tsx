@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
+import { Nunito } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
+
+const nunito = Nunito({
+  subsets: ["latin"],
+  weight: ["400", "700", "900"],
+  variable: "--font-nunito",
+});
 
 export const metadata: Metadata = {
   title: "Homework Helper | 숙제 도우미",
@@ -13,12 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet" />
-      </head>
+    <html lang="ko" className={nunito.variable}>
       <body>
         <header>
           <div className="container">

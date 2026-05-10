@@ -1,7 +1,5 @@
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/lib/prisma';
 import { NextResponse } from 'next/server';
-
-const prisma = new PrismaClient();
 
 export async function GET() {
   try {
@@ -9,7 +7,8 @@ export async function GET() {
       orderBy: { deadline: 'asc' },
     });
     return NextResponse.json(tasks);
-  } catch (error) {
+  } catch (err) {
+    console.error('GET /api/tasks error:', err);
     return NextResponse.json({ error: 'Failed to fetch tasks' }, { status: 500 });
   }
 }
@@ -29,8 +28,8 @@ export async function POST(request: Request) {
     });
     
     return NextResponse.json(task);
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    console.error('POST /api/tasks error:', err);
     return NextResponse.json({ error: 'Failed to create task' }, { status: 500 });
   }
 }

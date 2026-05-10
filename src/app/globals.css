@@ -7,7 +7,7 @@
   --card-bg: #FFFFFF;
   --border-radius: 16px;
   --box-shadow: 4px 4px 0px 0px var(--text);
-  --font-playful: 'Nunito', 'Arial', sans-serif;
+  --font-playful: var(--font-nunito), 'Arial', sans-serif;
 }
 
 * {

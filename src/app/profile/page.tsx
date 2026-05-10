@@ -1,6 +1,6 @@
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/lib/prisma';
 
-const prisma = new PrismaClient();
+export const dynamic = 'force-dynamic';
 
 export default async function ProfilePage() {
   const user = await prisma.user.findFirst({
@@ -9,7 +9,6 @@ export default async function ProfilePage() {
 
   if (!user) return <div>사용자를 찾을 수 없습니다.</div>;
 
-  const xpToNextLevel = user.level * 100;
   const progressPercent = (user.points % 100);
 
   return (

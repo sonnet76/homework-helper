@@ -1,14 +1,14 @@
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/lib/prisma';
 import { NextResponse } from 'next/server';
-
-const prisma = new PrismaClient();
 
 export async function PATCH(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  let taskId = 'unknown';
   try {
     const { id } = await params;
+    taskId = id;
     const body = await request.json();
     const { isCompleted } = body;
 
@@ -18,7 +18,8 @@ export async function PATCH(
     });
 
     return NextResponse.json(task);
-  } catch (error) {
+  } catch (err) {
+    console.error(`PATCH /api/tasks/${taskId} error:`, err);
     return NextResponse.json({ error: 'Failed to update task' }, { status: 500 });
   }
 }
@@ -27,13 +28,16 @@ export async function DELETE(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  let taskId = 'unknown';
   try {
     const { id } = await params;
+    taskId = id;
     await prisma.task.delete({
       where: { id: parseInt(id) },
     });
     return NextResponse.json({ message: 'Task deleted' });
-  } catch (error) {
+  } catch (err) {
+    console.error(`DELETE /api/tasks/${taskId} error:`, err);
     return NextResponse.json({ error: 'Failed to delete task' }, { status: 500 });
   }
 }
